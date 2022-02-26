@@ -102,10 +102,15 @@ var startGame = function() {
     enemyHealth = 50;
 
     //use debugger to pause script and check what is going on in the code
-    //debugger;
+    debugger;
 
     // pass the pickedEnemyName variable's value into the fight function
     fight(pickedEnemyName);
+    }
+
+    //if we're not at the last enemy in the array
+    if (playerHealth > 0 && i < enemyNames.length - 1) {
+      shop()
     }
     
     else {
@@ -139,5 +144,53 @@ var endGame = function() {
     window.alert("Thank you for playing Robot Gladiator!")
   }
 }
+
+var shop = function() {
+  
+  //ask player what they would like to do
+  var shopOptionPrompt = window.prompt(
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+  );
+
+  //use switch to carry out action
+  switch (shopOptionPrompt) {
+    
+    case "REFILL":
+    case "refill":
+      if (playerMoney >= 7){
+        window.alert("Refilling player's health by 20 for 7 dollars.");
+        playerHealth = playerHealth + 20;
+        playerMoney = playerMoney - 7;
+      }
+      else {
+        window.alert("You don't have enough money!")
+      }
+      break;
+
+    case "UPGRADE":
+    case "upgrade": 
+      if (playerMoney >= 7) {
+      
+        window.alert("Upgrading player's attack by 6 for 7 dollars.")
+        playerAttack = playerAttack + 6;
+        playerMoney = playerMoney -7;
+      }
+      else {
+        window.alert ("You don't have enough money!")
+      }
+      break;
+
+    case "LEAVE":
+    case "leave":
+      window.alert("Leaving the store.")
+      break;
+    
+    default:
+      window.alert("You did not pick a valid option. Try again.")
+      shop()
+      break;
+  }
+
+};
 
 startGame()
